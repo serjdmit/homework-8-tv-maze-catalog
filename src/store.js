@@ -1,15 +1,20 @@
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import { searchMiddleware } from './middlewares/searchMiddleware';
+import { showMiddleware } from './middlewares/showMiddleware';
+import rootReducer from './reducers';
 
-const getStore = () => {
-    const reducer = (previousState, action) => {
-        console.log(action);
-        return previousState;
-    };
-    const store = createStore(reducer, {});
-    store.subscribe(() => {
-        console.log('asdasd');
-    });
+const store = () => {
+    const store = createStore(
+        rootReducer,
+        compose(
+            applyMiddleware(searchMiddleware),
+            applyMiddleware(showMiddleware),
+            window.__REDUX_DEVTOOLS_EXTENSION__
+                ? window.__REDUX_DEVTOOLS_EXTENSION__()
+                : noop => noop
+        )
+    );
     return store;
 };
 
-export default getStore;
+export default store;

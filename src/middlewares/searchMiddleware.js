@@ -6,3 +6,7 @@
 // В случае ошибки searchFailure
 
 // На забудьте вызвать метод next.
+export const searchMiddleware = store => next => action => {
+    console.log(next);
+    return next(action);
+};
