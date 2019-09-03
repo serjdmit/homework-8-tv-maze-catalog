@@ -7,10 +7,5 @@
 // На забудьте вызвать метод next.
 
 export const showMiddleware = store => next => action => {
-    console.log(action);
-
-    console.log(store.getState());
-
-    console.log('asdasd');
     return next(action);
 };

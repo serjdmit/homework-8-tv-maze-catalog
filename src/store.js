@@ -3,7 +3,7 @@ import { searchMiddleware } from './middlewares/searchMiddleware';
 import { showMiddleware } from './middlewares/showMiddleware';
 import rootReducer from './reducers';
 
-const store = () => {
+const getStore = () => {
     const store = createStore(
         rootReducer,
         compose(
@@ -17,4 +17,4 @@ const store = () => {
     return store;
 };
 
-export default store;
+export default getStore;

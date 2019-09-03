@@ -5,3 +5,14 @@
 // и экшн showRequest.
 
 // В методе componentDidMount вам нужно будет диспатчить showRequest action
+import React from 'react';
+
+const ShowPage = () => {
+    return (
+        <>
+            <p>asdasd</p>
+        </>
+    );
+};
+
+export default ShowPage;
