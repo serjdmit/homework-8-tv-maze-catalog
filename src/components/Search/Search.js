@@ -11,22 +11,32 @@ import styles from './Search.module.css';
 import SearchPreview from '../ShowPreview';
 
 class Search extends Component {
-    componentDidMount() {
-        const { searchRequest } = this.props;
-        searchRequest();
+    state = {
+        searchResult: ''
     }
+
+    handleSearch = (event) => {
+        const value = event.target.value;
+        this.setState({
+            searchResult: value
+        });
+    }
+    handleClick = () => {
+        const { searchRequest } = this.props;
+        searchRequest(this.state.searchResult);
+    };
+
     render(){
-        // const [series, setSeries] = useState('');
         const { shows, search, error } = this.props;
-        this.shows = ['adasd'];
         if (search) return <p> Shows are searching... </p>;
-        if (error) return <p> Some went wrong </p>;
+        if (error) return <p> Something went wrong </p>;
+        // if (show) return <p>lalala</p>
         return (
             <>
                 <div className={styles.previewList}>
-                    <input type="text" className={`${styles.input} t-input`} placeholder="Название сериала" />
+                    <input type="text" className={`${styles.input} t-input`} placeholder="Название сериала" onChange={this.handleSearch} />
                     <div className={styles.buttonWrapper}>
-                        <button className={`${styles.button} t-search-button`} >Найти</button>
+                        <button className={`${styles.button} t-search-button`} onClick={this.handleClick}>Найти</button>
                     </div>
                 </div>
                 <div className={`${styles.searchPanel} t-search-result`}>
@@ -47,7 +57,6 @@ class Search extends Component {
         );
     }
 };
-
 const mapStateToProps = state => {
     return state;
 };

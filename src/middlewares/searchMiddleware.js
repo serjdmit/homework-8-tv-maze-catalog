@@ -11,8 +11,7 @@ import { search } from '../api';
 
 export const searchMiddleware = store => next => action => {
     if (action.type === searchRequest.toString()) {
-        console.log(store);
-        search('')
+        search(action.payload)
             .then(
                 data => {
                     store.dispatch(searchSuccess(data));
@@ -24,6 +23,6 @@ export const searchMiddleware = store => next => action => {
                 }
             );
     }
-    console.log(store);
+    // console.log(store);
     next(action);
 };
